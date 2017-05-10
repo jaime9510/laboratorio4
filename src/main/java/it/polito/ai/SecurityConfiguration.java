@@ -1,5 +1,6 @@
 package it.polito.ai;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,31 +8,45 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import it.polito.ai.service.UserDetailsServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	UserDetailsServiceImpl userDetailsServiceImpl;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().
-			withUser("user").
-			password("pass").
-			roles("USER").
-		and().
-			withUser("admin").
-			password("admin").
-			roles("USER", "ADMIN");
+		
+		auth.userDetailsService(userDetailsServiceImpl);
+		
+//		auth.inMemoryAuthentication().
+//			withUser("user").
+//			password("pass").
+//			roles("USER").
+//		and().
+//			withUser("admin").
+//			password("admin").
+//			roles("USER", "ADMIN");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/","index.html").permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/**").hasRole("USER")
+				.antMatchers("/","/user/registration","/home").permitAll()
+				.anyRequest().authenticated()
+//				.antMatchers("/admin/**").hasRole("ADMIN")
+//				.antMatchers("/**").hasRole("USER")
 			.and()
-				.formLogin();
+				.formLogin()
+					.loginPage("/login")
+	                .permitAll()
+	                .and()
+	            .logout()
+	                .permitAll();	
 	}
 
 	@Override

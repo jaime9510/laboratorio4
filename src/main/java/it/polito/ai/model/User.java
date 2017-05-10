@@ -21,11 +21,13 @@ public class User {
 	private String nickName;
 	private String email;
 	private String password;
+	private String role;
 
 	// TODO: Field for profile photo
 
 	public User(ObjectId id, String gender, Integer years, String instructionLevel, String ocupation, Auto auto,
-			String carSharing, String bike, String publicTransport, String nickName, String email, String password) {
+			String carSharing, String bike, String publicTransport, String nickName, String email, String password,
+			String role) {
 		super();
 		this.id = id;
 		this.gender = gender;
@@ -39,6 +41,7 @@ public class User {
 		this.nickName = nickName;
 		this.email = email;
 		this.password = password;
+		this.role = role;
 	}
 
 	public User() {
@@ -141,13 +144,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", gender=" + gender + ", years=" + years + ", instructionLevel=" + instructionLevel
 				+ ", ocupation=" + ocupation + ", auto=" + auto + ", carSharing=" + carSharing + ", bike=" + bike
 				+ ", publicTransport=" + publicTransport + ", nickName=" + nickName + ", email=" + email + ", password="
-				+ password + "]";
+				+ password + ", role=" + role + "]";
 	}
 	
 	
