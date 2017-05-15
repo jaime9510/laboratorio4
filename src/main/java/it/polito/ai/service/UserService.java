@@ -5,6 +5,8 @@ import it.polito.ai.web.dto.UserDto;
 
 public interface UserService {
 	
-	User registerNewUserAccount(UserDto accountDto) throws Exception;
+	public User registerNewUserAccount(UserDto accountDto) throws Exception;
 
+	public User getUserInformation(String nickName);
+	
 }

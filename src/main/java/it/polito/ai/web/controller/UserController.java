@@ -3,6 +3,9 @@ package it.polito.ai.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,10 +20,22 @@ import it.polito.ai.service.UserService;
 import it.polito.ai.web.dto.UserDto;
 
 @Controller
-public class RegistrationController {
+public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping(value = "/user/profile", method = RequestMethod.GET)
+	public String showUserProfile(WebRequest webRequest, Model model) {
+		
+		System.out.println("\n\n *********** profile **********\n\n");
+		
+		User user = new User();
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		user = userService.getUserInformation(userDetails.getUsername());
+		model.addAttribute("user", user);
+		return "userProfile";
+	}
 	
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String showRegistrationForm(WebRequest webRequest, Model model) {
@@ -44,7 +59,7 @@ public class RegistrationController {
 	        return new ModelAndView("registration", "user", userDto);
 	    } 
 	    else {
-	        return new ModelAndView("hello", "user", userDto);
+	        return new ModelAndView("login", "user", userDto);
 	    }
 	}
 	

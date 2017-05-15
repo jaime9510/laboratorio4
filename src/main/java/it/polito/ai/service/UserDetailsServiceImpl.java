@@ -22,14 +22,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
-	
-	@Override
-	public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException {
 
-		User user = repository.findByEmail(nickName);
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+		User user = repository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(
-              "No user found with username: "+ nickName);
+              "No user found with username: "+ email);
         }
 
         return new UserDetails() {

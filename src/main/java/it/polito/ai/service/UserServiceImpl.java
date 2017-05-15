@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerNewUserAccount(UserDto userDto) throws Exception {
 		
-		if (emailExist(userDto.getEmail())) {   
+		if (emailExist(userDto.getEmail()) || nickNameExist(userDto.getNickName())) {   
             throw new Exception("There is an account with that email address: "  + userDto.getEmail());
         }
 		User user = new User();
@@ -40,5 +40,19 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+	
+	private boolean nickNameExist(String nickName) {
+        User user = repository.findByNickName(nickName);
+        if (user != null) {
+            return true;
+        }
+        return false;
+    }
+
+	@Override
+	public User getUserInformation(String nickName) {
+		User user = repository.findByNickName(nickName);
+		return user;
+	}
 	
 }
