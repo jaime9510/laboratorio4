@@ -14,18 +14,36 @@ function setConnected(connected) {
 
 function connect() {
     var socket = new SockJS('/gs-guide-websocket');
+	//var socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
-        });
-    });
+    stompClient.connect(
+    		{}, 
+    		function (frame) 
+    		{
+        		setConnected(true);
+        		console.log('Connected: ' + frame);
+        		stompClient.subscribe('/topic/greetings', function (greeting) 
+        		{
+        			//alert("Ciao" + (greating.body).content);
+        			showGreeting(JSON.parse(greeting.body).content);
+        			console.log((greeting.body).content);
+        						
+        		}
+        						);
+    		},
+    		function(err) 
+    		{
+    					// connection error
+    			console.log("Sono dentro err della connect!!!");
+    		}
+    		);
+    
+  
 }
 
 function disconnect() {
-    if (stompClient != null) {
+    if (stompClient != null) 
+    {
         stompClient.disconnect();
     }
     setConnected(false);
@@ -38,6 +56,13 @@ function sendName() {
 
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
+}
+
+
+function connectmetro()
+{
+	connect();
+	return;
 }
 
 $(function () {
