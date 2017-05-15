@@ -19,8 +19,8 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
 	@Override
 	public Mongo mongo() throws Exception {
-		return new MongoClient("172.17.0.2", 27017);
-		
+		//return new MongoClient("172.17.0.2", 27017);
+		return new MongoClient("192.168.99.100", 5400);
 		// Alternative, mongodb service in the cloud (mlab)
 //		return new MongoClient(new MongoClientURI("mongodb://admin:admin@ds133321.mlab.com:33321/transport-social-platform"));
 	}

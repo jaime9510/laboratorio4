@@ -2,6 +2,7 @@ package it.polito.ai;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -31,8 +32,23 @@ public class WebSocketConfiguration extends AbstractSecurityWebSocketMessageBrok
     }
 
     @Override
+	protected boolean sameOriginDisabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/gs-guide-websocket").withSockJS();
+        //registry.addEndpoint("/chat").withSockJS();
     }
+
+	@Override
+	protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
+		messages.simpDestMatchers("/**").permitAll();
+	}
+    
+    
+    
 
 }

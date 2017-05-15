@@ -2,6 +2,7 @@ package it.polito.ai;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -34,9 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http
 			.authorizeRequests()
-				.antMatchers("/","/user/registration","/home", "/chat", "/css/**").permitAll()
+				.antMatchers("/","/user/registration","/home", "/chat", "/index", "/css/**").permitAll()
 //				.anyRequest().authenticated()
 				.anyRequest().permitAll()
 //				.antMatchers("/admin/**").hasRole("ADMIN")
@@ -48,7 +50,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	                .defaultSuccessUrl("/")
 	                .and()
 	            .logout()
-	                .permitAll();	
+	                .permitAll()
+	        .and()
+	            .httpBasic()
+	                .and()
+	            .csrf()
+	         /*.and()
+					.csrf()
+					.disable()*/;
 	}
 
 	@Override
