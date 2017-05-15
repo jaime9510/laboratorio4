@@ -15,10 +15,11 @@ public class UserDto {
     @Size(min = 1)
 	private String nickName;
 
+    @Size(min = 8)
     private String password;
 
     @NotNull
-    @Size(min = 1)
+    @Size(min = 8)
     private String matchingPassword;
 
     @NotNull
