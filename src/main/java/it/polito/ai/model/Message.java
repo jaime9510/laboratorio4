@@ -13,19 +13,31 @@ public class Message
 	private String nickName;
 	private String message;
 	private GregorianCalendar timestamp;
+	private String topic;
 	
 	
 	
 	
+
 	public Message() 
 	{
 	}
 
-	public Message(String nickName, String message, GregorianCalendar timestamp) 
+	public Message(String nickName, String message, GregorianCalendar timestamp, String topic) 
 	{
 		this.nickName = nickName;
 		this.message = message;
 		this.timestamp = timestamp;
+		this.topic=topic;
+	}
+	
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 	
 	public ObjectId getId() {
@@ -52,6 +64,13 @@ public class Message
 	public void setTimestamp(GregorianCalendar timestamp) {
 		this.timestamp = timestamp;
 	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", nickName=" + nickName + ", message=" + message + ", timestamp=" + timestamp
+				+ ", topic=" + topic + "]";
+	}
+	
 	
 	
 	

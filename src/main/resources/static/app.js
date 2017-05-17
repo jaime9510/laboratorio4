@@ -12,21 +12,36 @@ function setConnected(connected) {
     $("#greetings").html("");
 }
 
-function connect() {
+var conversazione=null;
+conversazione = window.location.search.substring(1);
+
+function connect() 
+{
     var socket = new SockJS('/gs-guide-websocket');
 	//var socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);
-    stompClient.connect(
+    document.getElementById('topic').innerHTML=conversazione;
+    
+    //var id= document.getElementById("link").getAttribute("href");
+    //var id=document.getElementById("topic");
+  
+    
+    stompClient.connect
+    (
     		{}, 
     		function (frame) 
     		{
         		setConnected(true);
         		console.log('Connected: ' + frame);
-        		stompClient.subscribe('/topic/greetings', function (greeting) 
+        		var name='/topic/_' + conversazione ; 	//può valere /topic/BusMetro, /topic/Traffico, /topic/GiroBici
+        		var chat="chat"+conversazione;
+        		stompClient.subscribe(name, function (chat) 
         		{
         			//alert("Ciao" + (greating.body).content);
-        			showGreeting(JSON.parse(greeting.body).content);
-        			console.log((greeting.body).content);
+        			//var metodo="chat" + conversazione;
+        			
+        			showGreeting(JSON.parse(chat.body).content);
+        			console.log((chat.body).content);
         						
         		}
         						);
@@ -41,7 +56,8 @@ function connect() {
   
 }
 
-function disconnect() {
+function disconnect() 
+{
     if (stompClient != null) 
     {
         stompClient.disconnect();
@@ -50,26 +66,62 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
-}
-
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
-}
-
-
-function connectmetro()
+function sendName() 
 {
-	connect();
-	return;
+	
+ 
+    
+    var nome="/app/" + conversazione;
+    
+    
+    //stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}))
+    stompClient.send(nome, {}, JSON.stringify({'name': $("#name").val()}));
+    
 }
 
-$(function () {
+function showGreeting(message) 
+{
+	console.log("Sono dentro showGreeting");
+    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+	
+}
+
+
+
+
+
+
+$(function () 
+{
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
+    $( "#connect" ).click(function() { 
+    	
+    	connect();
+    		});
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { 
+    	
+    	sendName(); 
+    	$("#name").val('');
+   });
 });
+
+
+
+$( document ).ready(function() 
+{	//con questo metodo la connessione avviene in automatico. Eliminarlo in caso di problemi
+	//conversazione = window.location.search.substring(1);
+    //var url=window.location.href ;
+    //url=url.split("?");
+    
+    
+   
+    //window.history.pushState('',document.title,url[0]);
+    
+	connect();
+});
+
+
+

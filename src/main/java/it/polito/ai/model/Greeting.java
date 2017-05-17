@@ -15,4 +15,11 @@ public class Greeting {
         return content;
     }
 
+	@Override
+	public String toString() {
+		return content;
+	}
+    
+    
+
 }

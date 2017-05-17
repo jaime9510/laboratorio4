@@ -9,10 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-	<script type="text/javascript" src="/app.js"></script>
+
 </head>
 
 <body>
@@ -53,21 +50,26 @@
 			<p></p>
 		</div>
 		<div class="row">
+		
 			<div class="col-md-4">
-				<a type="button"  class="btn btn-primary	btn-lg btn-block"
-					href="/index" > <span class="glyphicon glyphicon-comment"
-					aria-hidden="true"></span> Bus / Metro
+				<a type="button"  class="btn btn-primary	btn-lg btn-block" 
+					
+					href="/index?BusMetro" > <span class="glyphicon glyphicon-comment"
+					aria-hidden="true"
+					id="BusMetro"></span> Bus / Metro
 				</a>
 			</div>
 			<div class="col-md-4">
 				<a type="button" class="btn btn-info	btn-lg btn-block"
-					href="/home"> <span class="glyphicon glyphicon-comment"
+					
+					href="/index?Traffico"> <span class="glyphicon glyphicon-comment"
 					aria-hidden="true"></span> Traffico
 				</a>
 			</div>
 			<div class="col-md-4">
 				<a type="button" class="btn btn-default	btn-lg btn-block"
-					href="/home"> <span class="glyphicon glyphicon-comment"
+				 
+					href="/index?GiroBici"> <span class="glyphicon glyphicon-comment"
 					aria-hidden="true"></span> Giro in Bici
 				</a>
 			</div>

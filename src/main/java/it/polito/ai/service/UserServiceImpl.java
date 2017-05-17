@@ -1,5 +1,7 @@
 package it.polito.ai.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +55,12 @@ public class UserServiceImpl implements UserService {
 	public User getUserInformation(String nickName) {
 		User user = repository.findByNickName(nickName);
 		return user;
+	}
+
+	@Override
+	public List<User> findAll() 
+	{
+		return repository.findAll();
 	}
 	
 }

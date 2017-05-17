@@ -1,6 +1,8 @@
 package it.polito.ai;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,8 +17,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/chat").setViewName("chat");
-        registry.addViewController("/index").setViewName("index");
+        //registry.addViewController("/index").setViewName("index");
 	}
+	
 	
 	
 

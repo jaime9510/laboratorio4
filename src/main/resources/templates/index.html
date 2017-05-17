@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Hello WebSocket</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -13,6 +14,35 @@
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
+
+
+
+<div class="container">
+		
+		<div class="header clearfix" sec:authorize="isAuthenticated()">
+			<nav class="nav nav-pills pull-right">
+				<div class="container">
+					<a class="navbar-brand" sec:authentication="name">Welcome, </a>
+			        <form th:action="@{/logout}" method="post" class="control-group">
+			            <input type="submit" value="Sign Out" class="btn btn-warning navbar-btn navbar-right"/>
+			            <a type="button"
+							class="btn btn-primary navbar-btn navbar-right" href="/user/profile">
+							<span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+							Profile
+						</a>
+						<a type="button"
+						class="btn btn-default navbar-btn navbar-right" href="/home">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						Home
+					</a>
+			        </form>
+				</div>
+			</nav>
+		</div>
+</div>
+
+   
+    
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
@@ -20,14 +50,16 @@
                
                 <div class="form-group">
                     
-                   
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                   	
-                    </button>
+                   <div class="alert alert-info" role="alert">
+							<span id="topic" ></span>
+					</div>
                 </div>
             </form>
+            
+            
+            
+            
+            
         </div>
         <div class="col-md-6">
             <form class="form-inline">
@@ -44,11 +76,19 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>Discussione:</th>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+                
+                
+                <tbody >
+                
+                	<tr th:each="attr: ${messaggi}">
+                    	<th th:text="${attr}"></th>
+                	</tr>
+                
                 </tbody>
+                <tbody id="greetings">   </tbody>
             </table>
         </div>
     </div>
