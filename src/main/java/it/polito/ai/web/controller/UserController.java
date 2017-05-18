@@ -3,9 +3,12 @@ package it.polito.ai.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,16 +28,45 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	@RequestMapping(value = "/user/profile", method = RequestMethod.GET)
 	public String showUserProfile(WebRequest webRequest, Model model) {
-		
-		System.out.println("\n\n *********** profile **********\n\n");
-		
 		User user = new User();
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		user = userService.getUserInformation(userDetails.getUsername());
-		model.addAttribute("user", user);
-		return "userProfile";
+		
+		model.addAttribute("user", new UserDto(user));
+		return "profile";
+	}
+	
+	@RequestMapping(value = "/user/profile/modifica", method = RequestMethod.POST)
+	public ModelAndView userModifica(@ModelAttribute("user") @Valid UserDto userDto, 
+			BindingResult result, WebRequest request, Error error) {
+		
+		User modified = new User();
+		if(!result.hasErrors()) {
+			modified = userService.modifyUser(userDto);
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String userName = ((UserDetails)auth.getPrincipal()).getUsername();
+			if(modified != null && !userName.equals(modified.getNickName())) {
+				
+				Authentication authentication = new UsernamePasswordAuthenticationToken(userDetailsService.loadUserByUsername(modified.getEmail()), auth.getCredentials(), auth.getAuthorities());
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			}
+		}
+		
+		if (modified == null) {
+	        result.rejectValue("email", "message.regError");
+	    }
+	    if (result.hasErrors()) {
+	        return new ModelAndView("profile", "user", userDto);
+	    } 
+	    else {
+	        return new ModelAndView("profile", "user", new UserDto(modified));
+	    }
 	}
 	
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)

@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
 import it.polito.ai.model.Auto;
+import it.polito.ai.model.User;
 import it.polito.ai.validation.PasswordMatches;
 
 @PasswordMatches
@@ -35,6 +36,27 @@ public class UserDto {
 	private String carSharing;
 	private String bike;
 	private String publicTransport;
+	
+	public UserDto() {
+	}
+
+	public UserDto(User user) {
+		super();
+		this.nickName = user.getNickName();
+		this.password = null;
+		this.matchingPassword = null;
+		this.email = user.getEmail();
+		this.gender = user.getGender();
+		this.years = user.getYears();
+		this.instructionLevel = user.getInstructionLevel();
+		this.ocupation = user.getOcupation();
+		this.auto = user.getAuto();
+		this.carSharing = user.getCarSharing();
+		this.bike = user.getBike();
+		this.publicTransport = user.getPublicTransport();
+	}
+
+
 
 	public String getPassword() {
 		return password;
@@ -139,5 +161,5 @@ public class UserDto {
 				+ instructionLevel + ", ocupation=" + ocupation + ", auto=" + auto + ", carSharing=" + carSharing
 				+ ", bike=" + bike + ", publicTransport=" + publicTransport + "]";
 	}
-    
+	
 }

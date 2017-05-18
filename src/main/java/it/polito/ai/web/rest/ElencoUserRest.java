@@ -19,7 +19,7 @@ public class ElencoUserRest
 	UserService userService;
 	
 	
-		@RequestMapping(value="/ListUsers", method=RequestMethod.GET)
+		@RequestMapping(value="/listusers", method=RequestMethod.GET)
 		public List<User> getListUsers()
 		{
 			return userService.findAll();

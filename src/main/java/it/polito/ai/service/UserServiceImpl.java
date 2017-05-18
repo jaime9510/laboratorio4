@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.polito.ai.model.Auto;
 import it.polito.ai.model.User;
 import it.polito.ai.repository.UserRepository;
 import it.polito.ai.web.dto.UserDto;
@@ -27,6 +28,29 @@ public class UserServiceImpl implements UserService {
 		user.setNickName(userDto.getNickName());
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
+		user.setGender(userDto.getGender());
+		user.setYears(userDto.getYears());
+		user.setInstructionLevel(userDto.getInstructionLevel());
+		if(userDto.getAuto().getRegistrationYear() != null) {
+			user.setAuto(new Auto(userDto.getAuto().getRegistrationYear(), userDto.getAuto().getTypeFuel()));	
+		} else {
+			user.setAuto(new Auto(0, "No"));
+		}
+		if(userDto.getCarSharing() != null && !userDto.getCarSharing().isEmpty()) {
+			user.setCarSharing(userDto.getCarSharing());
+		} else {
+			user.setCarSharing("No");
+		}
+		if(userDto.getBike() != null && !userDto.getBike().isEmpty()) {
+			user.setBike(userDto.getBike());
+		} else {
+			user.setBike("No");
+		}
+		if(userDto.getPublicTransport() != null && !userDto.getPublicTransport().isEmpty()) {
+			user.setPublicTransport(userDto.getPublicTransport());
+		} else {
+			user.setPublicTransport("No");
+		}
 		
 		//TODO: for now all the users will be standard (it could change later)
 		user.setRole("USER");
@@ -61,6 +85,22 @@ public class UserServiceImpl implements UserService {
 	public List<User> findAll() 
 	{
 		return repository.findAll();
+	}
+
+	@Override
+	public User modifyUser(UserDto userDto) {
+		User user = repository.findByEmail(userDto.getEmail());
+		if(user != null) {
+			if(userDto.getNickName() != null && !userDto.getNickName().isEmpty()) {
+				user.setNickName(userDto.getNickName());
+			}
+			
+			if(userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+				user.setPassword(userDto.getPassword());
+			}
+			repository.save(user);
+		}
+		return user;
 	}
 	
 }

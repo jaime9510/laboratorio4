@@ -15,84 +15,66 @@
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 
-
-
-<div class="container">
-		
+    
+	<div id="main-content" class="container">
+	
 		<div class="header clearfix" sec:authorize="isAuthenticated()">
 			<nav class="nav nav-pills pull-right">
 				<div class="container">
 					<a class="navbar-brand" sec:authentication="name">Welcome, </a>
-			        <form th:action="@{/logout}" method="post" class="control-group">
-			            <input type="submit" value="Sign Out" class="btn btn-warning navbar-btn navbar-right"/>
-			            <a type="button"
-							class="btn btn-primary navbar-btn navbar-right" href="/user/profile">
-							<span aria-hidden="true" class="glyphicon glyphicon-user"></span>
-							Profile
-						</a>
-						<a type="button"
-						class="btn btn-default navbar-btn navbar-right" href="/home">
-						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		            <a type="button"
+						class="btn btn-primary navbar-btn navbar-right" href="/">
+						<span aria-hidden="true" class="glyphicon glyphicon-home"></span>
 						Home
 					</a>
-			        </form>
 				</div>
 			</nav>
 		</div>
-</div>
-
-   
-    
-<div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-               
-                <div class="form-group">
-                    
-                   <div class="alert alert-info" role="alert">
-							<span id="topic" ></span>
-					</div>
-                </div>
-            </form>
-            
-            
-            
-            
-            
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here..."/>
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Discussione:</th>
-                </tr>
-                </thead>
-                
-                
-                <tbody >
-                
-                	<tr th:each="attr: ${messaggi}">
-                    	<th th:text="${attr}"></th>
-                	</tr>
-                
-                </tbody>
-                <tbody id="greetings">   </tbody>
-            </table>
-        </div>
-    </div>
-<!--     </form> -->
+	
+	    <div class="row">
+	        <div class="col-md-6">
+	            <form class="form-inline">
+	               
+	                <div class="form-group">
+	                    
+	                   <div class="alert alert-info" role="alert">
+								<span id="topic" ></span>
+						</div>
+	                </div>
+	            </form>
+	        </div>
+	        <div class="col-md-6">
+	            <form class="form-inline">
+	                <div class="form-group">
+	                    <label for="name">Invia un messaggio</label>
+	                    <input type="text" id="name" class="form-control" placeholder="Scriva il messaggio qua..."/>
+	                </div>
+	                <button id="send" class="btn btn-default" type="submit">Invia</button>
+	            </form>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-md-12">
+	            <table id="conversation" class="table table-striped">
+	                <thead>
+	                <tr>
+	                    <th>Discussione:</th>
+	                </tr>
+	                </thead>
+	                
+	                
+	                <tbody >
+	                
+	                	<tr th:each="attr: ${messaggi}">
+	                    	<th th:text="${attr}"></th>
+	                	</tr>
+	                
+	                </tbody>
+	                <tbody id="greetings">   </tbody>
+	            </table>
+	        </div>
+	    </div>
+	<!--     </form> -->
 </div>
 </body>
 </html>

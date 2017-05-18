@@ -12,4 +12,7 @@ public interface UserService {
 	public User getUserInformation(String nickName);
 	
 	public List<User> findAll();
+	
+	public User modifyUser(UserDto userDto);
+	
 }
