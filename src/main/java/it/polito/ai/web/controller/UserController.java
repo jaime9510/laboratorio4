@@ -31,6 +31,21 @@ public class UserController {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	/*@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String showHomePAge( Model model) 
+	{
+		String image=null;
+		image=;
+
+		
+		model.addAttribute("image", image);
+		return "home";
+	}*/
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/user/profile", method = RequestMethod.GET)
 	public String showUserProfile(WebRequest webRequest, Model model) {
 		User user = new User();

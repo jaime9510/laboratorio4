@@ -1,8 +1,12 @@
 package it.polito.ai.model;
 
+import java.io.File;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.gridfs.GridFS;
 
 @Document
 public class User {
@@ -22,12 +26,14 @@ public class User {
 	private String email;
 	private String password;
 	private String role;
+	private GridFS immagine;
+	private String stringImage;
 
 	// TODO: Field for profile photo
 
 	public User(ObjectId id, String gender, Integer years, String instructionLevel, String ocupation, Auto auto,
 			String carSharing, String bike, String publicTransport, String nickName, String email, String password,
-			String role) {
+			String role, GridFS Image, String StringImage) {
 		super();
 		this.id = id;
 		this.gender = gender;
@@ -42,6 +48,8 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.immagine=Image;
+		this.stringImage= StringImage;
 	}
 
 	public User() {
@@ -151,6 +159,24 @@ public class User {
 		this.role = role;
 	}
 
+	public GridFS getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(GridFS immagine) {
+		this.immagine = immagine;
+	}
+
+	
+	
+	public String getStringImage() {
+		return stringImage;
+	}
+
+	public void setStringImage(String stringImage) {
+		this.stringImage = stringImage;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", gender=" + gender + ", years=" + years + ", instructionLevel=" + instructionLevel
@@ -158,6 +184,8 @@ public class User {
 				+ ", publicTransport=" + publicTransport + ", nickName=" + nickName + ", email=" + email + ", password="
 				+ password + ", role=" + role + "]";
 	}
+
+	
 	
 	
 

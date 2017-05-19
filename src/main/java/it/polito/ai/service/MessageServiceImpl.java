@@ -23,9 +23,9 @@ public class MessageServiceImpl implements MessageService
 	
 	
 	@Override
-	public void addMessage(String nickName, String message, String topic) 
+	public void addMessage(String nickName, String message, String topic, GregorianCalendar timestamp) 
 	{
-		GregorianCalendar timestamp=new GregorianCalendar();
+		
 		System.out.println(timestamp.getTime());
 		Message m=new Message(nickName, message, timestamp, topic);
 //		messageRepository.save(m);

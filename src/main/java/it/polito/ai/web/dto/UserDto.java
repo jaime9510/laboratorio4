@@ -1,9 +1,13 @@
 package it.polito.ai.web.dto;
 
+import java.io.File;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+
+import com.mongodb.gridfs.GridFS;
 
 import it.polito.ai.model.Auto;
 import it.polito.ai.model.User;
@@ -36,6 +40,9 @@ public class UserDto {
 	private String carSharing;
 	private String bike;
 	private String publicTransport;
+	private GridFS image;
+	private String stringImage;
+	
 	
 	public UserDto() {
 	}
@@ -54,6 +61,10 @@ public class UserDto {
 		this.carSharing = user.getCarSharing();
 		this.bike = user.getBike();
 		this.publicTransport = user.getPublicTransport();
+		//this.Image=user.getImmagine();
+		this.image=null;
+		this.stringImage=user.getStringImage();
+		
 	}
 
 
@@ -154,6 +165,24 @@ public class UserDto {
 		this.publicTransport = publicTransport;
 	}
 
+	public GridFS getImage() {
+		return image;
+	}
+
+	public void setImage(GridFS image) {
+		this.image = image;
+	}
+
+	
+	
+	public String getStringImage() {
+		return stringImage;
+	}
+
+	public void setStringImage(String stringImage) {
+		this.stringImage = stringImage;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDto [nickName=" + nickName + ", password=" + password + ", matchingPassword=" + matchingPassword
@@ -161,5 +190,7 @@ public class UserDto {
 				+ instructionLevel + ", ocupation=" + ocupation + ", auto=" + auto + ", carSharing=" + carSharing
 				+ ", bike=" + bike + ", publicTransport=" + publicTransport + "]";
 	}
+
+	
 	
 }
