@@ -2,16 +2,26 @@ package it.polito.ai.service;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.gridfs.GridFsOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.gridfs.GridFS;
 
+import it.polito.ai.MongoConfiguration;
 import it.polito.ai.model.Auto;
 import it.polito.ai.model.User;
 import it.polito.ai.repository.UserRepository;
@@ -37,27 +47,23 @@ public class UserServiceImpl implements UserService {
 		user.setGender(userDto.getGender());
 		user.setYears(userDto.getYears());
 		user.setInstructionLevel(userDto.getInstructionLevel());
-		user.setImmagine(null);
+		//user.setImmagine(null);
 		
 		
-		if(userDto.getStringImage() != null) 
+		/*if(userDto.getStringImage() != null) 
 		{
 			user.setStringImage(userDto.getStringImage());
-			/*String pathFile="../images/" + user.getStringImage() + ".png";
+			String pathFile="../images/" + user.getStringImage() + ".png";
 			File file=new File(pathFile);
 			
 			/*DB db=DB.class;
 			GridFS image=new GridFS(user, "user");
-			
-			
+			GridFsOperations gridOperations = (GridFsOperations) ctx.getBean("gridFsTemplate");
+			gridOperations.store(inputStream, "testing.png", "image/png", metaData);
 			
 			user.setImmagine(image);*/
 			
-			
-			
-			
-			
-		}
+		//}
 		
 		
 		if(userDto.getAuto().getRegistrationYear() != null) {
@@ -82,8 +88,8 @@ public class UserServiceImpl implements UserService {
 			user.setPublicTransport("No");
 		}
 		
-		if(userDto.getStringImage()==null)
-			System.out.println("La string eè null:::::::::::: ");
+		/*if(userDto.getStringImage()==null)
+			System.out.println("La string eè null:::::::::::: ");*/
 		
 		//TODO: for now all the users will be standard (it could change later)
 		user.setRole("USER");

@@ -65,8 +65,11 @@
 	                
 	                <tbody >
 	                
-	                	<tr th:each="attr: ${messaggi}">
+	                	<tr th:each="attr: ${messaggi}" >
+	                    	<!-- <img th:src="@{/attr.getImmagine}" src=attr.getImmagine/>-->
+	                    	
 	                    	<th th:text="${attr}"></th>
+	                    	
 	                	</tr>
 	                
 	                </tbody>

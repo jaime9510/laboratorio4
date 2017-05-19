@@ -1,5 +1,7 @@
 package it.polito.ai.web.controller;
 
+import java.util.GregorianCalendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -26,12 +28,12 @@ public class GreetingController {
 	@SendTo("/topic/greetings")
 	public Greeting greeting(HelloMessage message) throws Exception {
 		Thread.sleep(1000); // simulated delay
-		
+		GregorianCalendar timestamp=new GregorianCalendar();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String nickName=auth.getName();
 		String mess=message.getName();
 		
-		messageService.addMessage(nickName, mess, "PROVAAAA");
+		messageService.addMessage(nickName, mess, "PROVAAAA", timestamp);
 		return new Greeting("Hello, " + message.getName() + "!");
 	}
 	/*

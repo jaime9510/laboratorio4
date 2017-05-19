@@ -40,8 +40,8 @@ public class UserDto {
 	private String carSharing;
 	private String bike;
 	private String publicTransport;
-	private GridFS image;
-	private String stringImage;
+	/*private File image;
+	private String stringImage;*/
 	
 	
 	public UserDto() {
@@ -62,8 +62,8 @@ public class UserDto {
 		this.bike = user.getBike();
 		this.publicTransport = user.getPublicTransport();
 		//this.Image=user.getImmagine();
-		this.image=null;
-		this.stringImage=user.getStringImage();
+		//this.image=user.getImmagine();
+		//this.stringImage=user.getStringImage();
 		
 	}
 
@@ -165,11 +165,11 @@ public class UserDto {
 		this.publicTransport = publicTransport;
 	}
 
-	public GridFS getImage() {
+	/*public File getImage() {
 		return image;
 	}
 
-	public void setImage(GridFS image) {
+	public void setImage(File image) {
 		this.image = image;
 	}
 
@@ -181,7 +181,7 @@ public class UserDto {
 
 	public void setStringImage(String stringImage) {
 		this.stringImage = stringImage;
-	}
+	}*/
 
 	@Override
 	public String toString() {

@@ -26,14 +26,14 @@ public class User {
 	private String email;
 	private String password;
 	private String role;
-	private GridFS immagine;
-	private String stringImage;
+	//private File immagine;
+	//private String stringImage;
 
 	// TODO: Field for profile photo
 
 	public User(ObjectId id, String gender, Integer years, String instructionLevel, String ocupation, Auto auto,
 			String carSharing, String bike, String publicTransport, String nickName, String email, String password,
-			String role, GridFS Image, String StringImage) {
+			String role/*, File Image, String StringImage*/) {
 		super();
 		this.id = id;
 		this.gender = gender;
@@ -48,8 +48,8 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.immagine=Image;
-		this.stringImage= StringImage;
+		//this.immagine=Image;
+		//this.stringImage= StringImage;
 	}
 
 	public User() {
@@ -159,11 +159,11 @@ public class User {
 		this.role = role;
 	}
 
-	public GridFS getImmagine() {
+	/*public File getImmagine() {
 		return immagine;
 	}
 
-	public void setImmagine(GridFS immagine) {
+	public void setImmagine(File immagine) {
 		this.immagine = immagine;
 	}
 
@@ -175,7 +175,7 @@ public class User {
 
 	public void setStringImage(String stringImage) {
 		this.stringImage = stringImage;
-	}
+	}*/
 
 	@Override
 	public String toString() {

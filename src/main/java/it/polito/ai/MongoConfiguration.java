@@ -2,8 +2,10 @@ package it.polito.ai;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.DB;
@@ -28,7 +30,11 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 //		return new MongoClient(new MongoClientURI("mongodb://admin:admin@ds133321.mlab.com:33321/transport-social-platform"));
 	}
 	
-	
+	/*@Bean
+	public GridFsTemplate gridFSTemplate() throws Exception
+	{
+		return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
+	}*/
 	
 	
 	
