@@ -82,7 +82,11 @@ function sendName()
 function showGreeting(message) 
 {
 	console.log("Sono dentro showGreeting");
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+	$("#greetings").append("<tr>" +
+    		"<td>" +
+    		 "<img th:src='@{/images/uomo.png}' src='../images/uomo.png' class='img-rounded' width='36' height='36'/>" +
+    		 "</td><td>" + message + "</td></tr>");
+//    $("#greetings").append("<tr><td>" + message + "</td></tr>");
 	
 }
 
