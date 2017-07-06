@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta>
+	<title>Trasporto urbano</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header clearfix" sec:authorize="isAuthenticated()">
+			<nav class="nav nav-pills pull-right">
+				<div class="container">
+					<a class="navbar-brand" sec:authentication="name">Welcome, </a>
+			        <form th:action="@{/logout}" method="post" class="control-group">
+			            <input type="submit" value="Sign Out" class="btn btn-warning navbar-btn navbar-right"/>
+			            <a type="button"
+							class="btn btn-primary navbar-btn navbar-right" href="/user/profile">
+							<span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+							Profile
+						</a>
+			        </form>
+				</div>
+			</nav>
+		</div>
+		<div class="jumbotron">
+			<h1 class="text-center"	>Chat</h1>
+			<p></p>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<a type="button" class="btn btn-primary	btn-lg btn-block"
+					href="/home"> <span class="glyphicon glyphicon-comment"
+					aria-hidden="true"></span> Bus / Metro
+				</a>
+			</div>
+			<div class="col-md-4">
+				<a type="button" class="btn btn-info	btn-lg btn-block"
+					href="/home"> <span class="glyphicon glyphicon-comment"
+					aria-hidden="true"></span> Traffico
+				</a>
+			</div>
+			<div class="col-md-4">
+				<a type="button" class="btn btn-default	btn-lg btn-block"
+					href="/home"> <span class="glyphicon glyphicon-comment"
+					aria-hidden="true"></span> Giro in Bici
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		//verifica la compatibilità del browser
+		if ( window.WebSocket ) 
+		{ 
+			// creo la connessione verso l'host
+			var socket = new WebSocket("ws://echo.websocket.org/");
+			socket.onopen = function (event)
+			{
+
+    		//azioni da eseguire all'atto della connessione
+  			}
+  			socket.onmessage = function (event) 
+  			{
+    			var data=event.data;
+    			alert(data);
+    			//azioni da eseguire alla ricezione di un messaggio
+  			}
+
+			socket.onclose = function(event) 
+			{
+				//azioni da eseguire alla chiusura del socket
+			}	
+
+			socket.onerror = function (event) 
+			{
+			//azioni da eseguire in caso di errore
+			}
+			
+			if (socket.readyState===WebSocket.OPEN)
+				socket.send("Hello,WebSocket!");
+			
+		} else {
+			alert("WebSocket non supportati");
+		}
+		
+	</script>
+	
+	
+</body>
+
+</html>
+

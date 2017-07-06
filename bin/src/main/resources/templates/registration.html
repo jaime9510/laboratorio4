@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Registration</title>
+	
+	<!-- 	Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"></link>
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+	
+	<script type="text/javascript">
+		function handleClickAuto(myRadio) {
+			var currentValue = 0;
+		    currentValue = myRadio.value;
+		    if (currentValue === 'true') {
+		    	document.getElementById("siNoAuto").style.display = "";
+		    } else {
+		    	document.getElementById("siNoAuto").style.display = "none";
+		    }
+		};
+		function handleClickSharing(myRadio) {
+			var currentValue = 0;
+		    currentValue = myRadio.value;
+		    if (currentValue === 'true') {
+		    	document.getElementById("siNoSharing").style.display = "";
+		    } else {
+		    	document.getElementById("siNoSharing").style.display = "none";
+		    }
+		};
+		function handleClickBici(myRadio) {
+			var currentValue = 0;
+		    currentValue = myRadio.value;
+		    if (currentValue === 'true') {
+		    	document.getElementById("siNoBici").style.display = "";
+		    } else {
+		    	document.getElementById("siNoBici").style.display = "none";
+		    }
+		};
+		function handleClickTicket(myRadio) {
+			var currentValue = 0;
+		    currentValue = myRadio.value;
+		    if (currentValue === 'true') {
+		    	document.getElementById("siNoTicket").style.display = "";
+		    } else {
+		    	document.getElementById("siNoTicket").style.display = "none";
+		    }
+		};
+
+	</script>
+	
+</head>
+<body>
+	<div class="container">
+	
+		<div class="header clearfix">
+			<nav class="nav nav-pills pull-right">
+				<div class="container">
+					<a type="button"
+						class="btn btn-default navbar-btn navbar-right" href="/home">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+						Home
+					</a>
+					<a type="button"
+						class="btn btn-default navbar-btn navbar-right" href="/login">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						Sign in
+					</a>
+				</div>
+			</nav>
+		</div>
+		
+		<div class="jumbotron">
+			<h1 class="text-center">Registration</h1>
+		</div>
+		<p></p>
+		<form class="form-horizontal" th:action="@{/user/registration}" th:object="${user}"
+			method="POST" enctype="utf8">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Nickname</label>
+				<div class="col-md-6">
+					<input th:field="*{nickName}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" th:field="*{email}" />	
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Genere</label>
+				<div class="col-sm-10">
+					<select class="selectpicker" title="Select..." th:field="*{gender}">
+						<option value="Maschio">Maschio</option>
+						<option value="Femmina">Femmina</option>
+					</select>
+				</div>
+			</div>
+			
+			
+			
+			
+			<!-- <div class="form-group">
+				<label class="col-sm-2 control-label">Scegli un'icona</label>
+				<div class="radio col-sm-10">
+					<label>
+						<input type="radio" name="radioImage"  value="donna"  th:field="*{StringImage}"></input>
+						<img th:src="@{/images/donna.png}" src="../images/donna.png"  height="75"  width="75" />
+					</label>
+					<label>
+						<input type="radio" name="radioImage"  value="donna2" th:field="*{StringImage}"></input>
+						<img th:src="@{/images/donna2.png}" src="../images/donna2.png"  height="75"  width="75"  />
+					</label>
+					<label>
+						<input type="radio" name="radioImage"  value="donna3" th:field="*{StringImage}"></input>
+						<img th:src="@{/images/donna3.png}" src="../images/donna3.png"  height="75"  width="75" />
+					</label>
+					<label>
+						<input type="radio" name="radioImage"  value="uomo" th:field="*{StringImage}"></input>
+						<img th:src="@{/images/uomo.png}" src="../images/uomo.png"  height="75"  width="75" />
+					</label>
+					<label>
+						<input type="radio" name="radioImage"  value="uomo2" th:field="*{StringImage}"></input>
+						<img th:src="@{/images/uomo2.png}" src="../images/uomo3.png"  height="75"  width="75"  />
+					</label>
+					<label>
+						<input type="radio" name="radioImage"  value="uomo3" th:field="*{StringImage}"></input>
+						<img th:src="@{/images/uomo3.png}" src="../images/uomo3.png" height="75"  width="75" />
+					</label>
+				</div>
+			</div> -->
+			
+			
+			
+			
+			
+			
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Eta</label>
+				<div class="col-sm-10">
+					<input type="number" th:field="*{years}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Livello di istruzione</label>
+				<div class="col-sm-10">
+					<select class="selectpicker" title="Select..." th:field="*{instructionLevel}">
+						<option value="Elementare">Elementare</option>
+						<option value="Media inferiore">Media inferiore</option>
+						<option value="Media superiore">Media superiore</option>
+						<option value="Universitario">Universitario</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Auto</label>
+				<div class="radio col-sm-10">
+					<label><input type="radio" name="radio" onclick="handleClickAuto(this);" value="true"></input>Si</label>
+					<label><input type="radio" name="radio" onclick="handleClickAuto(this);" value="false"></input>No</label>
+				</div>
+			</div>
+			
+			<div id="siNoAuto" style="display: none; background: #f5f5f0; padding: 10px">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Anno di immatriculazione</label>
+					<div class="col-sm-10">
+						<input type="number" min="1930" max="2017" th:field="*{auto.registrationYear}"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Tipologia Carburante</label>
+					<div class="col-sm-10">
+						<select class="selectpicker" title="Select..." th:field="*{auto.typeFuel}">
+							<option value="Benzina">Benzina</option>
+							<option value="Diesel">Diesel</option>
+							<option value="Gas">Gas</option>
+							<option value="Metano">Metano</option>
+							<option value="Elettrico">Elettrico</option>
+							<option value="Ibrido">Ibrido</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Sharing auto</label>
+				<div class="radio col-sm-10">
+					<label><input type="radio" name="radioSharing" onclick="handleClickSharing(this);" value="true"></input>Si</label>
+					<label><input type="radio" name="radioSharing" onclick="handleClickSharing(this);" value="false"></input>No</label>
+				</div>
+			</div>
+			
+			<div id="siNoSharing" style="display: none; background: #f5f5f0; padding: 10px">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Fornitore</label>
+					<div class="col-sm-10">
+						<select class="selectpicker" title="Select..." th:field="*{carSharing}">
+							<option value="CarToGo">CarToGo</option>
+							<option value="Sharing car">Sharing car</option>
+							<option value="CarTo">CarTo</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Utilizzo bici</label>
+				<div class="radio col-sm-10">
+					<label><input type="radio" name="radioBici" onclick="handleClickBici(this);" value="true"></input>Si</label>
+					<label><input type="radio" name="radioBici" onclick="handleClickBici(this);" value="false"></input>No</label>
+				</div>
+			</div>
+			
+			<div id="siNoBici" style="display: none; background: #f5f5f0; padding: 10px">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Mezzo</label>
+					<div class="col-sm-10">
+						<select class="selectpicker" title="Select..." th:field="*{bike}">
+							<option value="Proprio">Proprio</option>
+							<option value="Bike Sharing">Bike Sharing</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Utilizzo trasporto pubblico</label>
+				<div class="radio col-sm-10">
+					<label><input type="radio" name="radioTrasporto" onclick="handleClickTicket(this);" value="true"></input>Si</label>
+					<label><input type="radio" name="radioTrasporto" onclick="handleClickTicket(this);" value="false"></input>No</label>
+				</div>
+			</div>
+			
+			<div id="siNoTicket" style="display: none; background: #f5f5f0; padding: 10px">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Titolo di viaggio usato di frequente</label>
+					<div class="col-sm-10">
+						<select class="selectpicker" title="Select..." th:field="*{publicTransport}">
+							<option value="Singolo">Singolo</option>
+							<option value="Giornaliero">Giornaliero</option>
+							<option value="Settimanale">Settimanale</option>
+							<option value="Mensile">Mensile</option>
+							<option value="Annuale">Annuale</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Password</label>
+				<div class="col-sm-10">
+					<input type="password" th:field="*{password}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Confermare password</label>
+				<div class="col-sm-10">
+					<input type="password" th:field="*{matchingPassword}" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input type="submit" value="Sign up" class="btn btn-default"/>
+				</div>
+			</div>
+<!-- 			<button type="submit">submit</button> -->
+		</form>
+
+<!-- 		<a th:href="@{/login.html}">login</a> -->
+	</div>
+</body>
+</html>

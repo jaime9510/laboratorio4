@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Hello WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+
+    
+	<div id="main-content" class="container">
+	
+		<div class="header clearfix" sec:authorize="isAuthenticated()">
+			<nav class="nav nav-pills pull-right">
+				<div class="container">
+					<a class="navbar-brand" sec:authentication="name">Welcome, </a>
+		            <a type="button"
+						class="btn btn-primary navbar-btn navbar-right" href="/">
+						<span aria-hidden="true" class="glyphicon glyphicon-home"></span>
+						Home
+					</a>
+				</div>
+			</nav>
+		</div>
+	
+	    <div class="row">
+	        <div class="col-md-6">
+	            <form class="form-inline">
+	               
+	                <div class="form-group">
+	                    
+	                   <div class="alert alert-info" role="alert">
+								<span id="topic" ></span>
+						</div>
+	                </div>
+	            </form>
+	        </div>
+	        <div class="col-md-6">
+	            <form class="form-inline">
+	                <div class="form-group">
+	                    <label for="name">Invia un messaggio</label>
+	                    <input type="text" id="name" class="form-control" placeholder="Scriva il messaggio qua..."/>
+	                </div>
+	                <button id="send" class="btn btn-default" type="submit">Invia</button>
+	            </form>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-md-12">
+	            <table id="conversation" class="table table-striped">
+	                <thead>
+	                <tr>
+	                    <th>Discussione:</th>
+	                </tr>
+	                </thead>
+	                
+	                
+	                <tbody >
+	                
+	                	<tr th:each="attr: ${messaggi}" >
+	                    	<!-- <img th:src="@{/attr.getImmagine}" src=attr.getImmagine/>-->
+	                    	<th><img th:src='@{/images/uomo.png}' src='../images/uomo.png' class='img-rounded' width='36' height='36'/></th>
+	                    	<th th:text="${attr}"></th>
+	                    	
+	                	</tr>
+	                
+	                </tbody>
+	                <tbody id="greetings">   </tbody>
+	            </table>
+	        </div>
+	    </div>
+	<!--     </form> -->
+</div>
+</body>
+</html>
